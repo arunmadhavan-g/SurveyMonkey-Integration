@@ -1,6 +1,6 @@
 package ford.surveymonkey.writer;
 
-import java.io.File;
+import java.io.OutputStream;
 import java.util.List;
 
 import ford.surveymonkey.mapper.response.IndividualResponse;
@@ -18,8 +18,8 @@ public class ExcelWriter {
 
 	private WritableWorkbook workBook;
 
-	public ExcelWriter(String filePath) throws Exception{
-		workBook = Workbook.createWorkbook(new File(filePath));
+	public ExcelWriter(OutputStream os) throws Exception{
+		workBook = Workbook.createWorkbook(os);
 	}
 
 	public void write(List<IndividualResponse> responses) throws Exception {

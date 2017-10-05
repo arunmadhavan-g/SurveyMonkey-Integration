@@ -1,6 +1,7 @@
 package ford.surveymonkey.coordinator;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Coordinator {
 
 	private Service service = new Service(ServiceConstants.accessToken);
 	
-	public void collectResponses() throws Exception {
+	public void collectResponses(OutputStream os) throws Exception {
 		List<IndividualResponse> results = new ArrayList<>();
 		Mapper mapper = new Mapper();
 		for(SurveyLink link: service.surveys()) {
@@ -23,7 +24,7 @@ public class Coordinator {
 			results.add(mapper.fillResponses(emptyResponses, service.surveyResponses(link.getId())));
 		}
 		
-		ExcelWriter writer = new ExcelWriter("C:\\Arun\\Test.xls");
+		ExcelWriter writer = new ExcelWriter(os);
 		writer.write(results);
 	}
 	

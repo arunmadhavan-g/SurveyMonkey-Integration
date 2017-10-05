@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileOutputStream;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -19,7 +22,7 @@ public class Runner {
 
 	@Test
 	public void collect() throws Exception {
-		coordinator.collectResponses();
+		coordinator.collectResponses(new FileOutputStream(new File("C:\\Arun\\Test.xls")));
 	}
 	
 	@Test
