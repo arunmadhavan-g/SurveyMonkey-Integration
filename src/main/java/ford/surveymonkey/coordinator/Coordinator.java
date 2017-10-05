@@ -35,7 +35,7 @@ public class Coordinator {
 	
 	public void deleteSurveys()  throws IOException {
 		for(SurveyLink link: service.surveys()) {
-			if(link.getId() != ServiceConstants.sampleSurveyId)
+			if(!ServiceConstants.sampleSurveyId.equals(link.getId()))
 				service.deleteSurvey(link.getId());
 		}
 	}
