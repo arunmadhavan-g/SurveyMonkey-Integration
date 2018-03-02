@@ -10,6 +10,7 @@ import ford.surveymonkey.mapper.response.IndividualResponse;
 import ford.surveymonkey.service.Service;
 import ford.surveymonkey.service.ServiceConstants;
 import ford.surveymonkey.service.survey.SurveyLink;
+import ford.surveymonkey.service.surveyresponse.SurveyResponse;
 import ford.surveymonkey.writer.ExcelWriter;
 
 public class Coordinator {
@@ -21,7 +22,12 @@ public class Coordinator {
 		Mapper mapper = new Mapper();
 		for(SurveyLink link: service.surveys()) {
 			IndividualResponse emptyResponses = mapper.buildQuestions(service.surveyDetails(link.getId()));
-			results.add(mapper.fillResponses(emptyResponses, service.surveyResponses(link.getId())));
+			if(emptyResponses != null)
+				System.out.println(String.format("No. of Questions for the Survey %s is %d", link.getTitle(), emptyResponses.getResponses().size()));
+			SurveyResponse surveyResponses = service.surveyResponses(link.getId());
+			if(surveyResponses != null)
+				System.out.println(String.format("No. of Questions for the Survey %s is %d", link.getTitle(), surveyResponses.getResponse().size()));
+			results.add(mapper.fillResponses(emptyResponses, surveyResponses));
 		}
 		
 		ExcelWriter writer = new ExcelWriter(os);

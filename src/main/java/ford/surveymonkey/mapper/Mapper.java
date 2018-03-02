@@ -20,13 +20,15 @@ public class Mapper {
 
 	public IndividualResponse fillResponses(IndividualResponse emptyResponse, SurveyResponse surveyResponse) {
 		List<Response> responses = new ArrayList<>();
-		for(Response response: emptyResponse.getResponses()) {
-			Response newResponse = new Response();
-			newResponse.setId(response.getId());
-			newResponse.setTitle(response.getTitle());
-			newResponse.setOptions(surveyResponse.optionsForQuestionId(response.getId(),response.getOptions()));
-			newResponse.setComments(surveyResponse.commentsForQuestionId(response.getId()));
-			responses.add(newResponse);
+		if(surveyResponse != null) {
+			for(Response response: emptyResponse.getResponses()) {
+				Response newResponse = new Response();
+				newResponse.setId(response.getId());
+				newResponse.setTitle(response.getTitle());
+				newResponse.setOptions(surveyResponse.optionsForQuestionId(response.getId(),response.getOptions()));
+				newResponse.setComments(surveyResponse.commentsForQuestionId(response.getId()));
+				responses.add(newResponse);
+			}
 		}
 		IndividualResponse returnVal = new IndividualResponse();
 		returnVal.setId(emptyResponse.getId());

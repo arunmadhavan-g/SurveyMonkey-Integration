@@ -50,9 +50,16 @@ public class Service {
 	}
 	
 	public void createSurvey(String surveyName, String templateId) throws IOException{
+		
+		try {
 		request.create(SurveyListService.class)
 				.createSurvey(headers, new CreateSurveyBody(templateId, surveyName))
 				.execute();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		//System.out.println(response.code());
+		//System.out.println(response.errorBody().string());
 	}
 	
 	public void deleteSurvey(String surveyId) throws IOException{

@@ -10,7 +10,6 @@ dependencies {
 	implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'org.projectlombok:lombok:1.16.18'
 	implementation 'net.sourceforge.jexcelapi:jxl:2.6.12'
-	    
     
     testImplementation 'junit:junit:4.12'
  	testImplementation "org.assertj:assertj-core:3.8.0"
